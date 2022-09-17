@@ -8,14 +8,24 @@ public class HeroController_1 : MonoBehaviour
     [Header("Animation Variables")]                                                             //"Pestaña" con título en el Inspector
     [SerializeField] AnimatorController_1 animatorController;               //Instanciamiento de Clase alias "animatorController"
                                                                             //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
+
+
+    [Header("Checker Variables")]                                //Cabecera del ComboBox "Variables"  
+    [SerializeField] LayerChecker_1 footA;                  //Instanciamento a la Clase "LayerChecker_1" = footA
+    [SerializeField] LayerChecker_1 footB;                  //Instanciamento a la Clase "LayerChecker_1" = footB
+
+    [Header("Rigid Variables")]
+    [SerializeField] private float speed_;                  //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
+    [SerializeField] private Vector2 movementDirection;     //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
     [SerializeField] private float jumpForce;               //Agregamos una variable flotante para agrear furza al salto
 
 
-    [SerializeField] private float speed_;                  //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
-    [SerializeField] private Vector2 movementDirection;     //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
+
     private Rigidbody2D rigidbody2D_;                       //Variable de instanciamiento
     private bool jumpPressed = false;                       //variable usadas para saber si se apretó la barra espaciadora
                                                             //y es personaje saltó.
+    private bool playerIsOnGround;                          //Variable privada tipo Bool, el Heroe esta tocando el piso?
+
 
 
 
@@ -30,12 +40,19 @@ public class HeroController_1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleIsGrounding();                                 //Invoca al método "HandleIsGrounding" (El héroe está tocando el piso?). 
         HandleControls();                                    //invocando el método "HandleControls" (abre el puerto de entrada del teclado)
         HandleMovement();                                    //invocando el método "HandleMovement" (multiplica el valor de "x" por "speed".
         HandleFlip();                                       //invocando el método "HandleFlip" (rota el personaje a la izquierda o a la derecha)
         HandleJump();                                       //invocando el método "HandleJump" (agregamos furza vertical hacia arriba al Hero)
 
     }
+
+    void HandleIsGrounding()
+    {
+        playerIsOnGround = footA.isTouching || footB.isTouching;	//Las variables de InstanciaDeClase footAB invocan a la ariable "isTouching" 
+    }                                                                   //de la clase "LayerChecker_1", si ambas son verdaderas entonces
+                                                                        //"playerIsOnGround"
 
     void HandleControls()
     {
@@ -48,7 +65,9 @@ public class HeroController_1 : MonoBehaviour
     void HandleMovement()
     {
         rigidbody2D_.velocity = new Vector2(movementDirection.x * speed_, rigidbody2D_.velocity.y);
-        if (Mathf.Abs(rigidbody2D_.velocity.x) > 0)    	//si el velor absoluto matemático de la velocidasd es mayor a cero..
+        if (playerIsOnGround)                           //Si la variable "playerIsOnGround" es verdadera entonces...
+        { 
+            if (Mathf.Abs(rigidbody2D_.velocity.x) > 0)    	//si el velor absoluto matemático de la velocidasd es mayor a cero..
         {
             animatorController.Play(AnimationId.Run);    //ejecuta en el script AnimatorController_1 el método "Play"
                                                          //mandando dentro de la variable "AnimationAI" el clip "Run"
@@ -57,6 +76,7 @@ public class HeroController_1 : MonoBehaviour
                                                             //mandando dentro de la variable "AnimationAI" el clip "Idle"
         {
             animatorController.Play(AnimationId.Idle);
+        }
         }
 
     }
@@ -77,11 +97,24 @@ public class HeroController_1 : MonoBehaviour
     void HandleJump()           //Método para agregarle fuerza la RigidBody del Hero
     {
 
-        if (jumpPressed)        //si la barra espaciadora es apretada.....
+        if(jumpPressed && playerIsOnGround)        //si la barra espaciadora es apretada y el Héroe toca el piso
+
 
         {
             this.rigidbody2D_.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);//agrega impulso de fuerza instantánea hacia arriba           
+            StartCoroutine(HandleJumpAnimation());                                  //Invocamos Corrutina "HandleJumpAnimation"El Héroe brinca, pero no 						cambia el clip a “Jump”
+
         }
+    }
+
+    IEnumerator HandleJumpAnimation()                       //Corrutina que ejecuta dos "clips" desfasados en tiempo 0.4f unidades de tiempo
+    {
+        yield return new WaitForSeconds(0.1f);                  //Espera 0.1f uniades de tiempo
+        animatorController.Play(AnimationId.PrepararBrinco);   //Ejecuta el clip "PrepararBrinco"
+        yield return new WaitForSeconds(0.2f);                  //Espera 0.2f uniades de tiempo
+        animatorController.Play(AnimationId.Brincar);           //Ejecuta el clip "Brinco"
+   
+
     }
 
 }

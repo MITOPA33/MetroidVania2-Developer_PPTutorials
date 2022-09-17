@@ -8,8 +8,11 @@ using UnityEngine;
 public enum AnimationId                 //Definimos un enumerado
 {
     Idle = 0,
-    Run = 1
- }
+    Run = 1,
+    PrepararBrinco = 3,
+    Brincar = 4
+
+}
 
 public class AnimatorController_1 : MonoBehaviour
 {
