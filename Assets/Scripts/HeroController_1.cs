@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class HeroController_1 : MonoBehaviour
 {
+    [Header("Animation Variables")]                                                             //"Pestaña" con título en el Inspector
+    [SerializeField] AnimatorController_1 animatorController;               //Instanciamiento de Clase alias "animatorController"
+                                                                            //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
+
     [SerializeField] private float speed_;                  //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
     [SerializeField] private Vector2 movementDirection;     //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
     private Rigidbody2D rigidbody2D_;                       //Variable de instanciamiento
@@ -13,6 +17,9 @@ public class HeroController_1 : MonoBehaviour
     void Start()
     {
         rigidbody2D_ = GetComponent<Rigidbody2D>();         //Variable de instanciamiento tipo "RigidBody2D"
+        animatorController.Play(AnimationId.Idle);                               //Llamamos a la clase "AnimatorController_1" y le mandamos a su
+                                                                                 //Método "Play" el "string" "Idle" guardado en "AnimationId"
+
     }
 
     // Update is called once per frame
@@ -32,6 +39,17 @@ public class HeroController_1 : MonoBehaviour
     void HandleMovement()
     {
         rigidbody2D_.velocity = new Vector2(movementDirection.x * speed_, rigidbody2D_.velocity.y);
+        if (Mathf.Abs(rigidbody2D_.velocity.x) > 0)    	//si el velor absoluto matemático de la velocidasd es mayor a cero..
+        {
+            animatorController.Play(AnimationId.Run);    //ejecuta en el script AnimatorController_1 el método "Play"
+                                                         //mandando dentro de la variable "AnimationAI" el clip "Run"
+        }
+        else                                                //de otro modo ejecuta en el script AnimatorController_1 el método "Play"
+                                                            //mandando dentro de la variable "AnimationAI" el clip "Idle"
+        {
+            animatorController.Play(AnimationId.Idle);
+        }
+
     }
     void HandleFlip()
     {

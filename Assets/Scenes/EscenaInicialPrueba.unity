@@ -4282,6 +4282,7 @@ GameObject:
   - component: {fileID: 1467145560}
   - component: {fileID: 1467145559}
   - component: {fileID: 1467145558}
+  - component: {fileID: 1467145561}
   m_Layer: 0
   m_Name: SpriteHolder
   m_TagString: Untagged
@@ -4350,7 +4351,7 @@ SpriteRenderer:
   m_SortingLayerID: 370014299
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6a18c350531b904794b3a0b5fdd9ebf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 857510b42659fee4aace76a46e98691e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4388,6 +4389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d14c07645033142bfe22a99c65f9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorController: {fileID: 1467145561}
   speed_: 10
   movementDirection: {x: 0, y: 0}
 --- !u!50 &1467145559
@@ -4427,6 +4429,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.032849185, y: 0.21287714}
   m_Size: {x: 0.31673768, y: 0.40214527}
   m_Direction: 0
+--- !u!114 &1467145561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467145554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f1b6a77e9f0f7488766cc051129825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1705158856
 GameObject:
   m_ObjectHideFlags: 0
