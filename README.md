@@ -1,2 +1,2 @@
-# MetroidVania2-Developer_PPTutorials
- Proyecto2ºDeveloper
+# MetroidVania2ºDeveloper_PPTutorials
+ Proyecto Semestral paso a paso
