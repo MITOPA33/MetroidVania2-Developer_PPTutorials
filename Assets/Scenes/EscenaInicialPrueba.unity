@@ -4390,6 +4390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animatorController: {fileID: 1467145561}
+  jumpForce: 10
   speed_: 10
   movementDirection: {x: 0, y: 0}
 --- !u!50 &1467145559
