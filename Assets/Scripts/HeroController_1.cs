@@ -14,7 +14,15 @@ public class HeroController_1 : MonoBehaviour
     [SerializeField] LayerChecker_1 footA;                  //Instanciamento a la Clase "LayerChecker_1" = footA
     [SerializeField] LayerChecker_1 footB;                  //Instanciamento a la Clase "LayerChecker_1" = footB
 
+    [Header("Boolean Variables")]                           //"Pestaña" con título en el Inspector 
+    public bool canDoubleJump;                              //variable boleana(verdadero/falso) para ejecutar el salto doble
+
+    [Header("Interruption Variables")]                      //"Pestaña" con título en el Inspector              
+    public bool canCheckGround;                             //Variable boleana, usada para detectar tocas el piso 
+
+
     [Header("Rigid Variables")]
+    [SerializeField] private float doubleJumpForce;         //Agregamos una variable flotante para agrear furza al DobleSalto
     [SerializeField] private float speed_;                  //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
     [SerializeField] private Vector2 movementDirection;     //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
     [SerializeField] private float jumpForce;               //Agregamos una variable flotante para agrear furza al salto
@@ -96,13 +104,22 @@ public class HeroController_1 : MonoBehaviour
     }
     void HandleJump()           //Método para agregarle fuerza la RigidBody del Hero
     {
+        if (canDoubleJump && jumpPressed && !playerIsOnGround)  //"!playerIsOnGround" esta variable nos indica que NO esta tocando el piso
+        {
+            this.rigidbody2D_.AddForce(Vector2.up * doubleJumpForce, ForceMode2D.Impulse);//agrega impulso de fuerza instantánea hacia arriba al doble salto           
+            canDoubleJump = false;                                                        //apagamos la variable "canDoubleJump“ para que no brinque infinitamente
+        }
 
-        if(jumpPressed && playerIsOnGround)        //si la barra espaciadora es apretada y el Héroe toca el piso
+
+        if (jumpPressed && playerIsOnGround)        //si la barra espaciadora es apretada y el Héroe toca el piso
 
 
         {
             this.rigidbody2D_.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);//agrega impulso de fuerza instantánea hacia arriba           
             StartCoroutine(HandleJumpAnimation());                                  //Invocamos Corrutina "HandleJumpAnimation"El Héroe brinca, pero no 						cambia el clip a “Jump”
+            canDoubleJump = true;                                                   //prendemos la variable "canDoubleJump" para que brinque
+                                                                                    //de nuevo si apretamos la barra espaciadora 
+
 
         }
     }
