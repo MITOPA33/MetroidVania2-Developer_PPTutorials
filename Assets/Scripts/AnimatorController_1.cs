@@ -9,8 +9,9 @@ public enum AnimationId                 //Definimos un enumerado
 {
     Idle = 0,
     Run = 1,
-    PrepararBrinco = 3,
-    Brincar = 4
+    PrepararBrinco = 2,
+    Brincar = 3,
+    Attack = 4
 
 }
 

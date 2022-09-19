@@ -4446,8 +4446,7 @@ MonoBehaviour:
   footA: {fileID: 428629635}
   footB: {fileID: 1960089198}
   canDoubleJump: 0
-  canCheckGround: 0
-  doubleJumpForce: 10
+  doubleJumpForce: 20
   speed_: 10
   movementDirection: {x: 0, y: 0}
   jumpForce: 20
