@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class HeroController_1 : MonoBehaviour
 {
+    [Header("Attack Variables")]
+    [SerializeField] SwordController_1 swordController;
+
     [Header("Animation Variables")]                                                             //"Pestaña" con título en el Inspector
     [SerializeField] AnimatorController_1 animatorController;               //Instanciamiento de Clase alias "animatorController"
                                                                             //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
@@ -160,6 +163,7 @@ public class HeroController_1 : MonoBehaviour
         {
             animatorController.Play(AnimationId.Attack);  //ejecutamos Clip "Atack"
             playerIsAttacking = true;                     //Prendemos la variable como verdadera (el héroe está atacando)
+            swordController.Attack(0.4f);
             StartCoroutine(RestoreAttack());              //Inicia corrutina "RestoreAttack" (reinicia
         }
 
@@ -170,7 +174,7 @@ public class HeroController_1 : MonoBehaviour
             yield return new WaitForSeconds(0.4f);          //espera 0.4f 
             playerIsAttacking = false;                      //Apaga variable "heroe esta tacando"
             if (!playerIsOnGround)                          //Si el héroe NO está en el piso.....
-                animatorController.Play(AnimationId.PrepararBrinco);  //Inicia clip "preparaBrinco"
+                animatorController.Play(AnimationId.Brincar);  //Inicia clip "preparaBrinco"
             canMove = true;                                 //prende la variable "canMove"
         }
 
