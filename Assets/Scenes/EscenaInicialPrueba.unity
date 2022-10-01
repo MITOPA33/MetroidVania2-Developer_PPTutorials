@@ -314,8 +314,8 @@ GameObject:
   m_Component:
   - component: {fileID: 608273075}
   - component: {fileID: 608273078}
-  - component: {fileID: 608273077}
   - component: {fileID: 608273076}
+  - component: {fileID: 608273079}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -359,20 +359,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &608273077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608273074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb633a878b7b1640901bcb6016b63a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePoints: 5
-  targetTag: 1
 --- !u!58 &608273078
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -389,6 +375,20 @@ CircleCollider2D:
   m_Offset: {x: 0.24, y: 0.26707327}
   serializedVersion: 2
   m_Radius: 0.2329267
+--- !u!114 &608273079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608273074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076df9ea9a37fd244b3039adc305f662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePoints: 5
+  targetTag: 2
 --- !u!1 &797558413
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,9 +404,9 @@ GameObject:
   - component: {fileID: 797558415}
   - component: {fileID: 797558414}
   - component: {fileID: 797558420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ghost-halo-1
-  m_TagString: Enemy
+  m_TagString: Ernesto
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -540,7 +540,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797558413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.72, y: 2.4, z: 0}
+  m_LocalPosition: {x: 3.38, y: 2.4, z: 0}
   m_LocalScale: {x: -5.5314655, y: 5.0891957, z: 5.15466}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -557,10 +557,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 797558413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700f8bf1cb714be48b8393ca5d7faa39, type: 3}
+  m_Script: {fileID: 11500000, guid: c4623808792ff9444a479dd49657ea23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 75
+  health: 90
   damageFeedbackEffect: {fileID: 797558414}
 --- !u!1 &823951202
 GameObject:
@@ -4592,9 +4592,9 @@ GameObject:
   - component: {fileID: 1467145559}
   - component: {fileID: 1467145558}
   - component: {fileID: 1467145561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpriteHolder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4639,7 +4639,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a40465af9602b48449aee41068ceacc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4679,7 +4679,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467145554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.66, y: 0, z: -0.1}
   m_LocalScale: {x: 6.2662854, y: 6.2662854, z: 6.2662854}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4701,7 +4701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d14c07645033142bfe22a99c65f9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordController: {fileID: 608273077}
+  health: 10
+  swordController: {fileID: 608273079}
   animatorController: {fileID: 1467145561}
   footA: {fileID: 428629635}
   footB: {fileID: 1960089198}
@@ -4712,6 +4713,7 @@ MonoBehaviour:
   speed_: 10
   movementDirection: {x: 0, y: 0}
   jumpForce: 20
+  heroe: {fileID: 1467145554}
 --- !u!50 &1467145559
 Rigidbody2D:
   serializedVersion: 4
@@ -6274,7 +6276,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1837279150}
-  - component: {fileID: 1837279151}
+  - component: {fileID: 1837279153}
+  - component: {fileID: 1837279152}
+  - component: {fileID: 1837279154}
   m_Layer: 0
   m_Name: Damage
   m_TagString: Untagged
@@ -6297,7 +6301,44 @@ Transform:
   m_Father: {fileID: 797558419}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1837279151
+--- !u!50 &1837279152
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837279149}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &1837279153
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837279149}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.05, y: 0.29}
+  serializedVersion: 2
+  m_Radius: 0.26
+--- !u!114 &1837279154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6306,10 +6347,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1837279149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3687fc7898f7d7640a13bf9408868913, type: 3}
+  m_Script: {fileID: 11500000, guid: 70c34f8f2cf335f49b1342fec355f1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePoints: 40
+  damagePoints: 1
   targetTag: 0
 --- !u!1 &1904684596
 GameObject:

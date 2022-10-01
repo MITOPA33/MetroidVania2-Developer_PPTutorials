@@ -20,6 +20,7 @@ public class DamageController_1 : MonoBehaviour
         if (collision.gameObject.tag.Equals(targetTag.ToString()))
         {
             var component = collision.gameObject.GetComponent<ITargetCombat_1>();
+            Debug.Log(component);
             if (component != null)
             {
                 component.TakeDamage(damagePoints);

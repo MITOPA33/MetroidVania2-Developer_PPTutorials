@@ -6,7 +6,7 @@ public class SwordController_1 : MonoBehaviour
 {
     [SerializeField] int damagePoints;
     [SerializeField] TagId_1 targetTag;
-    private new Collider2D collider2D;
+    private Collider2D collider2D;
     private void Awake()
     {
 
@@ -18,34 +18,30 @@ public class SwordController_1 : MonoBehaviour
 
     public void Attack(float attackDuration)
     {
-
+        //Debug.Log("2");
         collider2D.enabled = true;
+        //Debug.Log("2 " + collider2D.isTrigger);
         StartCoroutine(_Attack(attackDuration));
     }
 
     private IEnumerator _Attack(float attackDuration)
     {
-
-
         yield return new WaitForSeconds(attackDuration);
         collider2D.enabled = false;
-
-        //yield return new WaitForSeconds(attackDuration);
-        //Awake();
+        //Debug.Log("3 " + collider2D.isTrigger);
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       //Debug.Log("OnTrigger");
+
 
         if (collision.gameObject.tag.Equals(targetTag.ToString()))
         {
-            Debug.Log("OnTrigger");
             var component = collision.gameObject.GetComponent<ITargetCombat_1>();
             if (component != null)
                 component.TakeDamage(damagePoints);
-           
+            Debug.Log(component);
         }
 
     }
