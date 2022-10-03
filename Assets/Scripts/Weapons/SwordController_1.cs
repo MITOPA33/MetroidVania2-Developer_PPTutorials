@@ -6,7 +6,7 @@ public class SwordController_1 : MonoBehaviour
 {
     [SerializeField] int damagePoints;
     [SerializeField] TagId_1 targetTag;
-    private Collider2D collider2D;
+    private new Collider2D collider2D;
     private void Awake()
     {
 

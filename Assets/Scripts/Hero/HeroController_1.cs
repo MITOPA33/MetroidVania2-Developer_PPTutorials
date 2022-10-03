@@ -34,8 +34,8 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
     [SerializeField] private Vector2 movementDirection;     //"SerializeField" significa que desde el inspector podemos  manipular o ver su valor.
     [SerializeField] private float jumpForce;               //Agregamos una variable flotante para agrear furza al salto
 
-    [Header("Audio")]
-    [SerializeField] AudioClip attackSfx;
+    [Header("Audio")]                                       //Cabecera de Audio
+    [SerializeField] AudioClip attackSfx;                   //Variable tipo "AudioClip" usada cuando el Héroe ataca
 
     private bool attackPressed = false;                     //activamos Input del LeftClick del Mouse
     private Rigidbody2D rigidbody2D_;                       //Variable de instanciamiento
@@ -168,7 +168,7 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
 
         if (attackPressed && !playerIsAttacking)          //Si apretamos RMB y NO está  atacando..
         {
-            AudioManager_1.instance.PlaySfx(attackSfx);
+            AudioManager_1.instance.PlaySfx(attackSfx);   //Mandamos llamar el Clip de Audio al Atacar.  
             animatorController.Play(AnimationId.Attack);  //ejecutamos Clip "Atack"
             playerIsAttacking = true;                     //Prendemos la variable como verdadera (el héroe está atacando)
             swordController.Attack(0.4f);
