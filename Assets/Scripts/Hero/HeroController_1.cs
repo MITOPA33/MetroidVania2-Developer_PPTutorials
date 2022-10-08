@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HeroController_1 : MonoBehaviour, ITargetCombat_1
 {
@@ -43,19 +44,20 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
                                                             //y es personaje saltó.
     private bool playerIsOnGround;                          //Variable privada tipo Bool, el Heroe esta tocando el piso?
                                                             //Ésta variable en el Inspector inicia sin palomear (false)
-    private float alpha = 1;                                //
-    public GameObject heroe;                                //
+    private float alpha = 1;                                //Opacidd del héroe 1=Opaco, 0 = Transparente
+    public GameObject heroe;                                //GameObject "heroe"
 
-
-
+    public TMP_Text Contador;                               //variable tipo "TMP_Text" = Contador (salud del Héroe)
+                                                            //El valor de "Contador" esta linkeado al texto del Canvas
+                                                            //y va variando de acuerdo el método "TakeDamage"
     void Start()
     {
 
         canMove = true;                                     //Al iniciar el juego el personaje se mueve "Run" y "Idle"
         rigidbody2D_ = GetComponent<Rigidbody2D>();         //Variable de instanciamiento tipo "RigidBody2D"
-        animatorController.Play(AnimationId.Idle);                               //Llamamos a la clase "AnimatorController_1" y le mandamos a su
-                                                                                 //Método "Play" el "string" "Idle" guardado en "AnimationId"
-
+        animatorController.Play(AnimationId.Idle);          //Llamamos a la clase "AnimatorController_1" y le mandamos a su
+                                                            //Método "Play" el "string" "Idle" guardado en "AnimationId"
+        Contador.text = "Salud:  " + health;                //Declaramos el valor de "Contador.text"
     }
 
     // Update is called once per frame
@@ -188,13 +190,15 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
 
 
     }
-    public void TakeDamage(int damagePoints)
+    public void TakeDamage(int damagePoints)                //Método para mostrar el daño al héroe (opacidad, numérico)
     {
-        health = Mathf.Clamp(health - damagePoints, 0, 10);
-        alpha -= health * Time.deltaTime;                                                        //canal alpha
-        Color newColor = new Color(1, 1, 1, alpha);                                             //nuevo color con efecto alpha
-        heroe.GetComponent<SpriteRenderer>().color = newColor;                                  //obtenemos el componente SpriteRender y aplicamos nuevo color
-        Debug.Log(health);
+        health = Mathf.Clamp(health - damagePoints, 0, 10); //El rango de la Salud está entre min = 0 y Max = 10. 
+        alpha -= health * Time.deltaTime;                   //canal alpha ecrece de acuerdo a "health"
+        Color newColor = new Color(1, 1, 1, alpha);         //nuevo color con efecto alpha
+        heroe.GetComponent<SpriteRenderer>().color = newColor;   //obtenemos el componente SpriteRender y aplicamos nuevo color
+        Contador.text = "Salud:  " + health.ToString();          //Declaramos el valor de "Contador.text"
+        //Contador.text = "Salud:  " + health;                //(Otra forma) Declaramos el valor de "Contador.text"
+        Debug.Log(Contador.text);
         if (health == 0)
         {
             Destroy(gameObject);
