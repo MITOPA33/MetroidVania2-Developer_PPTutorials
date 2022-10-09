@@ -10,9 +10,9 @@ public class Aleatorio_4 : MonoBehaviour
     {
         Debug.Log(velocidad);
         transform.Translate(velocidad * Time.deltaTime, 0, 0);
-        if (transform.position.x < 3.29)   //Rango de desplazamieneto en "+X"
+        if (transform.position.x < 3.00)   //Rango de desplazamieneto en "+X"
             velocidad = -velocidad;
-        if (transform.position.x > -6.71)  //Rango de desplazamieneto en "-X"
+        if (transform.position.x > -6.0)  //Rango de desplazamieneto en "-X"
             velocidad = -velocidad;
     }
 }
