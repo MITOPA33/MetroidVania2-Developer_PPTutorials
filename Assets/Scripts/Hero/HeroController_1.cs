@@ -6,8 +6,8 @@ using TMPro;
 
 public class HeroController_1 : MonoBehaviour, ITargetCombat_1
 {
-    [Header("Health Variables")]//
-    [SerializeField] int health = 10;//
+    [Header("Health Variables")]                            //cabecera de Salud
+    [SerializeField] int health = 10;                       //variable de salud
 
     [Header("Attack Variables")]
     [SerializeField] SwordController_1 swordController;
@@ -189,7 +189,10 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
         }
 
 
+
     }
+
+
     public void TakeDamage(int damagePoints)                //Método para mostrar el daño al héroe (opacidad, numérico)
     {
         health = Mathf.Clamp(health - damagePoints, 0, 10); //El rango de la Salud está entre min = 0 y Max = 10. 
