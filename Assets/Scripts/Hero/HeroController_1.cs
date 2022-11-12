@@ -50,6 +50,21 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
     public TMP_Text Contador;                               //variable tipo "TMP_Text" = Contador (salud del Héroe)
                                                             //El valor de "Contador" esta linkeado al texto del Canvas
                                                             //y va variando de acuerdo el método "TakeDamage"
+
+    public static HeroController_1 instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Start()
     {
 
@@ -207,5 +222,12 @@ public class HeroController_1 : MonoBehaviour, ITargetCombat_1
             Destroy(gameObject);
         }
     }
+
+    public void UpdatePosition(Vector2 position)
+    {
+        this.transform.position = position;
+        rigidbody2D_.velocity = Vector2.zero;
+    }
+
 
 }

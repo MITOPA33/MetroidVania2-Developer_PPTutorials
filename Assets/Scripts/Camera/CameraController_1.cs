@@ -37,30 +37,30 @@ public class CameraController_1 : MonoBehaviour
 //               CameraSize cameraSizeY;
 
            Vector3 vel;
-    /*
+  
 
-           Vector2 targetTemp;
+           //Vector2 targetTemp;
 
            private bool freezeCamera = false;
+    /*
+            public void ChangeCameraSize(float sizeCamera) {
+                 StartCoroutine(_ChangeCameraSize( sizeCamera));
+             }
+             IEnumerator _ChangeCameraSize(float sizeCamera)
+             {
+                 var size = Camera.main.orthographicSize;
 
-          public void ChangeCameraSize(float sizeCamera) {
-               StartCoroutine(_ChangeCameraSize( sizeCamera));
-           }
-           IEnumerator _ChangeCameraSize(float sizeCamera)
-           {
-               var size = Camera.main.orthographicSize;
+                 while (size< sizeCamera) {
+                     size += sizeSpeed;
+                     Camera.main.orthographicSize = size;
+                     background.transform.localScale= new Vector3(size* scaleFactor.x, size* scaleFactor.y,1);
+                     GetSize();
+                     yield return new WaitForSeconds(Time.deltaTime);
 
-               while (size< sizeCamera) {
-                   size += sizeSpeed;
-                   Camera.main.orthographicSize = size;
-                   background.transform.localScale= new Vector3(size* scaleFactor.x, size* scaleFactor.y,1);
-                   GetSize();
-                   yield return new WaitForSeconds(Time.deltaTime);
-
-               }
+                 }
 
 
-           }*/
+             }*/
     void Start()
     {
                targetGameObject = GameObject.FindGameObjectWithTag(target.ToString());
@@ -80,21 +80,26 @@ public class CameraController_1 : MonoBehaviour
 //               cameraSizeY.max = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - this.transform.position.y;
 
     }
- /*
-           public void UpdatePosition(Vector2 position)
-           {
-               this.transform.position = (Vector3)position+new Vector3(0,0,offsetZ);
-           }
-           public void FreezeCamera() 
-           {
-               freezeCamera = true;
-           }
-*/
-           void Update()
+    /*
+              public void UpdatePosition(Vector2 position)
+              {
+                  this.transform.position = (Vector3)position+new Vector3(0,0,offsetZ);
+              }
+              public void FreezeCamera() 
+              {
+                  freezeCamera = true;
+              }
+   */
+    public void FreezeCamera()
+    {
+        freezeCamera = true;
+    }
+
+    void Update()
            {
 
-              if (targetGameObject)
-                {
+        if (targetGameObject && !freezeCamera)
+        {
 //                   targetTemp = new Vector2( targetGameObject.transform.position.x, targetTemp.y);
 //                   if (HeroController.instance.playerIsOnGround) {
 //                        targetTemp.y= targetGameObject.transform.position.y;
