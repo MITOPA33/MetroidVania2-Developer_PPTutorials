@@ -58,3 +58,6 @@ TagManager:
   - name: Hero
     uniqueID: 370014299
     locked: 0
+  - name: PowerUps
+    uniqueID: 701305131
+    locked: 0
